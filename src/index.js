@@ -20,13 +20,22 @@ app.set('view engine', '.hbs')
 
 // middlewares
 app.use(morgan('dev'))
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use((req, res, next) => {
+
+  next()
+})
 
 // global variables
 
 // routes
 app.use(require('./routes'))
+app.use(require('./routes/authentication'))
+app.use('/links', require('./routes/links'))
 
 // public
+app.use(express.static(path.join(__dirname, 'public')))
 
 // starting server
 app.listen(app.get('port'), () => {
