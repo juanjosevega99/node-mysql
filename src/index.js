@@ -1,18 +1,23 @@
 const express = require('express')
 const morgan = require('morgan')
+const exphbs = require('express-handlebars')
 
 // initializations
 const app = express()
 
 // settings
 app.set('port', process.env.PORT || 4000)
+app.engine('.hbs', exphbs({
+  defaultLayout: 'main'
+}))
 
 // middlewares
 app.use(morgan('dev'))
 
 // global variables
 
-// route
+// routes
+app.use(require('./routes'))
 
 // public
 
