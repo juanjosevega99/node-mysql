@@ -2,9 +2,11 @@ const express = require('express')
 const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const path = require('path')
+const passport = require('passport');
 
 // initializations
 const app = express()
+require('./lib/passport');
 
 // settings
 app.set('port', process.env.PORT || 4000)
@@ -22,6 +24,10 @@ app.set('view engine', '.hbs')
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use((req, res, next) => {
 
   next()
