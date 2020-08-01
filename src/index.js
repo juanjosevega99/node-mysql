@@ -28,12 +28,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use((req, res, next) => {
-
-  next()
-})
 
 // global variables
+app.use((req, res, next) => {
+  app.locals.user = req.user
+  next()
+})
 
 // routes
 app.use(require('./routes'))

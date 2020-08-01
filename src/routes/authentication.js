@@ -24,8 +24,13 @@ router.post('/signup', (req, res, next) => {
   })(req, res, next)
 })
 
-// router.get('/profile', isLoggedIn, (req, res) => {
-//   res.render('profile')
-// })
+router.get('/profile', isLoggedIn, (req, res) => {
+  res.render('profile')
+})
+
+router.get('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/signin');
+});
 
 module.exports = router
